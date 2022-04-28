@@ -1,0 +1,8 @@
+.counter-result {
+  color: white;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+.counter-result .count {
+  color: red;
+}

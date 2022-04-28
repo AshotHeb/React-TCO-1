@@ -1,0 +1,9 @@
+.counter-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(169, 169, 228);
+}
+.counter-section .section-heading {
+  color: white;
+}

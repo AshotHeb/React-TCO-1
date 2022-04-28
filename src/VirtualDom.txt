@@ -1,0 +1,9 @@
+   //Recansulation
+
+   <p className="counter-result">
+      Result :: <span className="count">0</span>{" "}
+    </p>
+
+       <p className="counter-result changed">
+      Result :: <span className="count">1</span>{" "}
+    </p>

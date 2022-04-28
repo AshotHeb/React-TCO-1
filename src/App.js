@@ -1,7 +1,11 @@
+import { Counter } from "./Counter";
+import { UsersList } from "./UsersList";
+
 function App() {
   return (
     <div className="App">
-      <div>Lesson 3</div>
+      <Counter />
+      <UsersList />
     </div>
   );
 }
