@@ -17,9 +17,9 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Props /> */}
-      {/* <ChildrenProp /> */}
-      {/* <State /> */}
+      <Props />
+      <ChildrenProp />
+      <State />
       <Aside isOpen={isAsideOpen} />
       <Button style={{ position: "fixed", right: 0 }} onClick={handleClick}>
         Open
