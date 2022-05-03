@@ -1,0 +1,16 @@
+.btn {
+  padding: 10px 50px;
+  background-color: #8f89ff;
+  color: white;
+  border: none;
+  margin-left: 10px;
+  font-size: 39px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: #4a43da;
+}
+.counter-actions-box {
+  display: flex;
+  justify-content: center;
+}
