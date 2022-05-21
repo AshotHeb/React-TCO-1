@@ -1,24 +1,24 @@
 import { useState } from "react";
 import { Button, Input } from "reactstrap";
+import { SORT_FIELDS } from "../../../../../consts";
 import { SharedModal } from "../../../../../shared/SharedModal";
 import "./styles.css";
 
-const SortSelect = () => {
+const SortSelect = ({ handleSort }) => {
   return (
-    <Input name="sort_by" type="select">
-      <option>Sort By</option>
-      <option>Newest First</option>
-      <option>Oldest First</option>
-      <option>Todo at Newest</option>
+    <Input name="sort" type="select" onChange={handleSort}>
+      {SORT_FIELDS.map(({ value, label }) => {
+        return <option value={value} key={label}>{label}</option>
+      })}
     </Input>
   );
 };
 
-const SearchInput = () => {
-  return <Input type="search" placeholder="Search" name="search"></Input>;
+const SearchInput = ({ handleSearch }) => {
+  return <Input type="search" placeholder="Search" name="search" onChange={handleSearch}></Input>;
 };
 
-export const HeadRight = ({ setTasks }) => {
+export const HeadRight = ({ setTasks, getTasks }) => {
   const [isShowAddTaskModal, setIsShowAddTaskModal] = useState(false);
   const handleBtnClick = () => {
     if (isShowAddTaskModal) {
@@ -27,6 +27,18 @@ export const HeadRight = ({ setTasks }) => {
       setIsShowAddTaskModal(true);
     }
   };
+
+
+  const handleSort = (event) => {
+    const { value } = event.target
+    // ['sort' , 'creation_date_oldest']
+    getTasks(['sort', value])
+  }
+  const handleSearch = (event) => {
+    const { value } = event.target
+    getTasks(['search', value])
+
+  }
 
   return (
     <div className="main-section-head-right">
@@ -38,8 +50,8 @@ export const HeadRight = ({ setTasks }) => {
       >
         Add New Task
       </Button>
-      <SortSelect />
-      <SearchInput />
+      <SortSelect handleSort={handleSort} />
+      <SearchInput handleSearch={handleSearch} />
       {isShowAddTaskModal && (
         <SharedModal
           onClose={() => {
