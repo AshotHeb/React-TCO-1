@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { getTasksRequest } from "../../api";
+import { generateQuery } from "../../helpers";
 import { FilterSection } from "./FilterSection";
 import { MainSection } from "./MainSection";
 import "./styles.css";
@@ -9,13 +10,6 @@ export const Project = () => {
   const [tasks, setTasks] = useState([]);
   const [queryObject, setQueryObject] = useState({});
 
-  const generateQuery = (filterObject) => {
-    // [['sort','created_at'] ,['search','barev']]]
-    return Object.entries(filterObject).reduce((query, [field, value]) => {
-      query += `${field}=${value}&`;
-      return query;
-    }, "");
-  };
   /* useEffects */
   useEffect(() => {
     const query = generateQuery(queryObject);

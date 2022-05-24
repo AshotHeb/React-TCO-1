@@ -25,7 +25,7 @@ const SearchInput = ({ handleSearch }) => {
       placeholder="Search"
       name="search"
       onChange={handleSearch}
-    ></Input>
+    />
   );
 };
 
