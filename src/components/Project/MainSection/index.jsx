@@ -1,25 +1,13 @@
-import { useEffect, useState } from "react";
 import { Body } from "./Body";
 import { Head } from "./Head";
 import "./styles.css";
-import { getTasks } from "../../../api";
 
-export const MainSection = () => {
-  /* Local State */
-  const [tasks, setTasks] = useState([]);
-
-  /* useEffects */
-  useEffect(() => {
-    getTasks().then((data) => {
-      setTasks(data);
-    });
-  }, []);
-
+export const MainSection = ({ setTasks, tasks, setFilterField }) => {
   /* Event handlers */
 
   return (
     <div className="main-section">
-      <Head setTasks={setTasks} />
+      <Head setTasks={setTasks} setFilterField={setFilterField} />
       <Body tasks={tasks} />
     </div>
   );

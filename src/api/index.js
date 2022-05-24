@@ -7,6 +7,6 @@ function get(url) {
       return data;
     });
 }
-export function getTasks() {
-  return get(`${BACKEND_URL}/task`);
+export function getTasksRequest(query) {
+  return get(`${BACKEND_URL}/task${query ? `?${query}` : ''}`);
 }
