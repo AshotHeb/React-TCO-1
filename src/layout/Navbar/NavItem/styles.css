@@ -1,13 +1,11 @@
 .nav-item {
   font-size: 30px;
-  color: white;
   margin-left: 20px;
   cursor: pointer;
 }
-.nav-item:hover {
-  color: rgb(166, 84, 243);
+.nav-item > a {
+  color: white;
 }
-
-.nav-item.active {
+.nav-item > a.active {
   color: blueviolet;
 }

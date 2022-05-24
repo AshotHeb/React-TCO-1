@@ -8,7 +8,7 @@ export const NAVBAR_LINKS = {
     label: "Contact",
   },
   aboutMe: {
-    link: "about-me",
+    link: "",
     label: "About Me",
   },
 };

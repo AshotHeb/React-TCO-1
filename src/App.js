@@ -1,13 +1,14 @@
+import { BrowserRouter } from "react-router-dom";
+import { RoutesComponent } from "./components/Routes";
 import { Header } from "./layout/Header";
-import { ProjectPage } from "./pages/Project";
-import { BACKEND_URL } from "./consts";
 
 function App() {
-  console.log(BACKEND_URL);
   return (
     <div className="App">
-      <Header />
-      <ProjectPage />
+      <BrowserRouter>
+        <Header />
+        <RoutesComponent />
+      </BrowserRouter>
     </div>
   );
 }
