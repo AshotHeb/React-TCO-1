@@ -8,17 +8,28 @@ const SortSelect = ({ handleSort }) => {
   return (
     <Input name="sort" type="select" onChange={handleSort}>
       {SORT_FIELDS.map(({ value, label }) => {
-        return <option value={value} key={label}>{label}</option>
+        return (
+          <option value={value} key={label}>
+            {label}
+          </option>
+        );
       })}
     </Input>
   );
 };
 
 const SearchInput = ({ handleSearch }) => {
-  return <Input type="search" placeholder="Search" name="search" onChange={handleSearch}></Input>;
+  return (
+    <Input
+      type="search"
+      placeholder="Search"
+      name="search"
+      onChange={handleSearch}
+    ></Input>
+  );
 };
 
-export const HeadRight = ({ setTasks, getTasks }) => {
+export const HeadRight = ({ setTasks, setFilterField }) => {
   const [isShowAddTaskModal, setIsShowAddTaskModal] = useState(false);
   const handleBtnClick = () => {
     if (isShowAddTaskModal) {
@@ -28,17 +39,15 @@ export const HeadRight = ({ setTasks, getTasks }) => {
     }
   };
 
-
   const handleSort = (event) => {
-    const { value } = event.target
+    const { value } = event.target;
     // ['sort' , 'creation_date_oldest']
-    getTasks(['sort', value])
-  }
+    setFilterField(["sort", value]);
+  };
   const handleSearch = (event) => {
-    const { value } = event.target
-    getTasks(['search', value])
-
-  }
+    const { value } = event.target;
+    setFilterField(["search", value]);
+  };
 
   return (
     <div className="main-section-head-right">
