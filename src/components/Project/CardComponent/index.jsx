@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   Button,
   Card,
@@ -8,7 +9,7 @@ import {
 } from "reactstrap";
 
 export const CardComponent = ({
-  todo: { title, description, todo_at, status },
+  todo: { title, description, todo_at, status, _id },
 }) => {
   // const { title, description, todo_at, status } = props.todo;
 
@@ -21,7 +22,9 @@ export const CardComponent = ({
         width="100%"
       />
       <CardBody>
-        <CardTitle tag="h5">{title}</CardTitle>
+        <Link to={`/project/${_id}`}>
+          <CardTitle tag="h5">{title}</CardTitle>
+        </Link>
         <CardText>{description}</CardText>
         <Button>Done</Button>
       </CardBody>
