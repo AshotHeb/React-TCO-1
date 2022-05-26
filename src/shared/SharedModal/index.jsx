@@ -10,6 +10,8 @@ import {
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { isRequired, maxLength20, minLength3 } from "../../helpers/validations";
 import { BACKEND_URL } from "../../consts";
+import { DatePick } from "../../components/DatePick";
+import * as moment from "moment";
 
 const AddTaskForm = ({ onSubmitCallback, setTasks }) => {
   const titleInputRef = useRef(null);
@@ -28,6 +30,8 @@ const AddTaskForm = ({ onSubmitCallback, setTasks }) => {
     },
   });
 
+  const [startDate, setStartDate] = useState(new Date());
+
   const onSubmit = (e) => {
     e.preventDefault();
     const {
@@ -38,6 +42,7 @@ const AddTaskForm = ({ onSubmitCallback, setTasks }) => {
     const formData = {
       title,
       description,
+      date: moment(startDate).format("YYYY-MM-DD"),
     };
 
     fetch(`${BACKEND_URL}/task`, {
@@ -116,7 +121,9 @@ const AddTaskForm = ({ onSubmitCallback, setTasks }) => {
           <FormFeedback>{inputsData.description.error}</FormFeedback>
         )}
       </FormGroup>
-      {/* Date Picker */}
+      <FormGroup>
+        <DatePick startDate={startDate} setStartDate={setStartDate} />
+      </FormGroup>
       <Button color="primary" onClick={onSubmit}>
         Add Task
       </Button>{" "}
