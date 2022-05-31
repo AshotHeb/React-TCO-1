@@ -8,7 +8,7 @@ export const MainSection = ({ setTasks, tasks, setFilterField }) => {
   return (
     <div className="main-section">
       <Head setTasks={setTasks} setFilterField={setFilterField} />
-      <Body tasks={tasks} />
+      <Body tasks={tasks} setTasks={setTasks} />
     </div>
   );
 };
