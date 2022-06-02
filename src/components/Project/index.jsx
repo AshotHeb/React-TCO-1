@@ -21,9 +21,6 @@ export const Project = () => {
 
   /* cashed callbacks */
   const setFilterField = useCallback((filterEntries) => {
-    // ['sort' , 'creation_date_oldest']
-    //['search' ,'aaa']
-
     const [name, value] = filterEntries;
 
     setQueryObject((prev) => {
@@ -44,7 +41,7 @@ export const Project = () => {
 
   return (
     <div className="project-layout">
-      <FilterSection tasks={tasks} setTasks={setTasks} />
+      <FilterSection tasks={tasks} setTasks={setTasks} setFilterField={setFilterField}/>
       <MainSection
         tasks={tasks}
         setTasks={setTasks}

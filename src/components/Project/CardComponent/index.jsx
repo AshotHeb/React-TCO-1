@@ -10,11 +10,13 @@ import {
 
 export const CardComponent = ({
   todo: { title, description, todo_at, status, _id },
+  toggleDeletedTask,
 }) => {
-  // const { title, description, todo_at, status } = props.todo;
-
   return (
     <Card style={{ width: "300px", minHeight: "300px" }}>
+      <div>
+        <input type="checkbox" onClick={() => toggleDeletedTask(_id)} />
+      </div>
       <CardImg
         alt="Card image cap"
         src="https://picsum.photos/318/180"
