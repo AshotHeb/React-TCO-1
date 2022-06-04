@@ -9,7 +9,7 @@ export const mirrorInputReducer = (state = initialState, action) => {
         case "SET_INPUT_VALUE":
             return {
                 ...state,
-                inputValue: action.newValue
+                inputValue: action.paylod
             }
         default:
             return state
