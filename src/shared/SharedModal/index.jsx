@@ -12,8 +12,10 @@ import { isRequired, maxLength20, minLength3 } from "../../helpers/validations";
 import { BACKEND_URL } from "../../consts";
 import { DatePick } from "../../components/DatePick";
 import * as moment from "moment";
+import { connect } from "react-redux";
+import { addNewTaskAction } from "../../redux/actions/task-actions";
 
-const AddTaskForm = ({ onSubmitCallback, setTasks }) => {
+const ConnectedAddTaskForm = ({ onSubmitCallback, setTasks, addNewTask }) => {
   const titleInputRef = useRef(null);
   const descriptionInputRef = useRef(null);
 
@@ -54,9 +56,7 @@ const AddTaskForm = ({ onSubmitCallback, setTasks }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setTasks((prev) => {
-          return [...prev, data];
-        });
+        addNewTask(data)
         onSubmitCallback();
       });
   };
@@ -131,6 +131,10 @@ const AddTaskForm = ({ onSubmitCallback, setTasks }) => {
     </Form>
   );
 };
+
+export const AddTaskForm = connect(null, {
+  addNewTask: addNewTaskAction
+})(ConnectedAddTaskForm)
 
 export const SharedModal = ({ onClose, setTasks }) => {
   return (

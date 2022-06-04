@@ -5,8 +5,10 @@ import { Button } from "reactstrap";
 import { CardComponent } from "../../CardComponent";
 import "./styles.css";
 import { BACKEND_URL } from "../../../../consts";
+import { connect } from "react-redux";
+import { removeMultipleTasksAction } from "../../../../redux/actions/task-actions";
 
-export const Body = ({ tasks, setTasks }) => {
+const ConnectedBody = ({ tasks, setTasks, removeMultipleTasks }) => {
   const [deletedTasksSet, setDeletedTasksSet] = useState(new Set());
 
   const toggleDeletedTask = useCallback((_id) => {
@@ -34,9 +36,7 @@ export const Body = ({ tasks, setTasks }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setTasks((prev) => {
-          return prev.filter((task) => !batchDelTasks.includes(task._id));
-        });
+        removeMultipleTasks(batchDelTasks)
       });
   };
 
@@ -63,3 +63,14 @@ export const Body = ({ tasks, setTasks }) => {
     </>
   );
 };
+
+
+const mapStateToProps = (state) => ({
+  tasks: state.taskReducerState.tasks
+})
+const mapDispatchToProps = (dispatch) => ({
+  removeMultipleTasks: (deletedTasksIds) => dispatch(removeMultipleTasksAction(deletedTasksIds))
+  // {type:'REMOVE_MULTIPLE_TASKS' , payload:deletedTasksIds}
+})
+
+export const Body = connect(mapStateToProps, mapDispatchToProps)(ConnectedBody)
