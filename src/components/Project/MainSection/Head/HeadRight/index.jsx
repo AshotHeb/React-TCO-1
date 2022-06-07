@@ -29,7 +29,7 @@ const SearchInput = ({ handleSearch }) => {
   );
 };
 
-export const HeadRight = ({ setTasks, setFilterField }) => {
+export const HeadRight = ({ setFilterField }) => {
   const [isShowAddTaskModal, setIsShowAddTaskModal] = useState(false);
   const handleBtnClick = () => {
     if (isShowAddTaskModal) {
@@ -66,7 +66,6 @@ export const HeadRight = ({ setTasks, setFilterField }) => {
           onClose={() => {
             setIsShowAddTaskModal(false);
           }}
-          setTasks={setTasks}
         />
       )}
     </div>

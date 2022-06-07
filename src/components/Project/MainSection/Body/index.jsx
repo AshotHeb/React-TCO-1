@@ -4,11 +4,10 @@ import { useState } from "react";
 import { Button } from "reactstrap";
 import { CardComponent } from "../../CardComponent";
 import "./styles.css";
-import { BACKEND_URL } from "../../../../consts";
 import { connect } from "react-redux";
-import { removeMultipleTasksAction } from "../../../../redux/actions/task-actions";
+import { removeMultipleTasksThunk } from "../../../../redux/actions/task-actions";
 
-const ConnectedBody = ({ tasks, setTasks, removeMultipleTasks }) => {
+const ConnectedBody = ({ tasks, removeMultipleTasks }) => {
   const [deletedTasksSet, setDeletedTasksSet] = useState(new Set());
 
   const toggleDeletedTask = useCallback((_id) => {
@@ -25,19 +24,7 @@ const ConnectedBody = ({ tasks, setTasks, removeMultipleTasks }) => {
 
   const handleBatchDelete = () => {
     const batchDelTasks = Array.from(deletedTasksSet);
-    fetch(`${BACKEND_URL}/task`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        tasks: batchDelTasks,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        removeMultipleTasks(batchDelTasks)
-      });
+    removeMultipleTasks(batchDelTasks);
   };
 
   return (
@@ -64,13 +51,12 @@ const ConnectedBody = ({ tasks, setTasks, removeMultipleTasks }) => {
   );
 };
 
-
 const mapStateToProps = (state) => ({
-  tasks: state.taskReducerState.tasks
-})
+  tasks: state.taskReducerState.tasks,
+});
 const mapDispatchToProps = (dispatch) => ({
-  removeMultipleTasks: (deletedTasksIds) => dispatch(removeMultipleTasksAction(deletedTasksIds))
-  // {type:'REMOVE_MULTIPLE_TASKS' , payload:deletedTasksIds}
-})
+  removeMultipleTasks: (deletedTasksIds) =>
+    dispatch(removeMultipleTasksThunk(deletedTasksIds)),
+});
 
-export const Body = connect(mapStateToProps, mapDispatchToProps)(ConnectedBody)
+export const Body = connect(mapStateToProps, mapDispatchToProps)(ConnectedBody);

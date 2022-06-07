@@ -12,12 +12,6 @@ export const RoutesComponent = () => {
       <Route path="project" element={<ProjectPage />} />
       <Route path="/project/:taskId" element={<SingleTask />} />
 
-      {/* For looking */}
-      {/* <Route path="project" element={<ProjectPage />}>
-        <Route path="1" element={<div>1</div>} />
-        <Route path="2" element={<div>2</div>} />
-      </Route> */}
-
       <Route path="/contact" element={<ContactPage />} />
       <Route path="*" element={<NotFound404Page />} />
     </Routes>

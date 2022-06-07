@@ -9,13 +9,12 @@ import {
 } from "reactstrap";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { isRequired, maxLength20, minLength3 } from "../../helpers/validations";
-import { BACKEND_URL } from "../../consts";
 import { DatePick } from "../../components/DatePick";
 import * as moment from "moment";
 import { connect } from "react-redux";
-import { addNewTaskAction } from "../../redux/actions/task-actions";
+import { addNewTaskThunk } from "../../redux/actions/task-actions";
 
-const ConnectedAddTaskForm = ({ onSubmitCallback, setTasks, addNewTask }) => {
+const ConnectedAddTaskForm = ({ onSubmitCallback, addNewTask }) => {
   const titleInputRef = useRef(null);
   const descriptionInputRef = useRef(null);
 
@@ -47,18 +46,7 @@ const ConnectedAddTaskForm = ({ onSubmitCallback, setTasks, addNewTask }) => {
       date: moment(startDate).format("YYYY-MM-DD"),
     };
 
-    fetch(`${BACKEND_URL}/task`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        addNewTask(data)
-        onSubmitCallback();
-      });
+    addNewTask(formData, onSubmitCallback);
   };
 
   const handleChange = (e) => {
@@ -133,15 +121,15 @@ const ConnectedAddTaskForm = ({ onSubmitCallback, setTasks, addNewTask }) => {
 };
 
 export const AddTaskForm = connect(null, {
-  addNewTask: addNewTaskAction
-})(ConnectedAddTaskForm)
+  addNewTask: addNewTaskThunk,
+})(ConnectedAddTaskForm);
 
-export const SharedModal = ({ onClose, setTasks }) => {
+export const SharedModal = ({ onClose }) => {
   return (
     <Modal toggle={onClose} isOpen={true}>
       <ModalHeader toggle={onClose}>Modal title</ModalHeader>
       <ModalBody>
-        <AddTaskForm onSubmitCallback={onClose} setTasks={setTasks} />
+        <AddTaskForm onSubmitCallback={onClose} />
       </ModalBody>
       <ModalFooter>
         <Button onClick={onClose}>Cancel</Button>
