@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { getTasksRequest } from "../../api";
 import { generateQuery } from "../../helpers";
 import { FilterSection } from "./FilterSection";
 import { MainSection } from "./MainSection";
+import { setTasksAction } from '../../redux/actions/task-actions'
 import "./styles.css";
 
-export const Project = () => {
+const ConnectedProject = ({ setTasks }) => {
   /* Local State */
-  const [tasks, setTasks] = useState([]);
   const [queryObject, setQueryObject] = useState({});
 
   /* useEffects */
@@ -15,7 +16,7 @@ export const Project = () => {
     const query = generateQuery(queryObject);
 
     getTasksRequest(query).then((data) => {
-      setTasks(data);
+      setTasks(data)
     });
   }, [queryObject]);
 
@@ -41,12 +42,17 @@ export const Project = () => {
 
   return (
     <div className="project-layout">
-      <FilterSection tasks={tasks} setTasks={setTasks} setFilterField={setFilterField}/>
+      <FilterSection setFilterField={setFilterField} />
       <MainSection
-        tasks={tasks}
         setTasks={setTasks}
         setFilterField={setFilterField}
       />
     </div>
   );
 };
+
+
+
+export const Project = connect(null, {
+  setTasks: setTasksAction
+})(ConnectedProject)
