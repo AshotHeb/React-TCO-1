@@ -3,7 +3,7 @@ import { NAVBAR_LINKS } from "../../consts";
 import { NavItem } from "./NavItem";
 import "./styles.css";
 
-const { project, contact, aboutMe } = NAVBAR_LINKS;
+const { project, contact, aboutMe, registration, login } = NAVBAR_LINKS;
 
 export const Navbar = () => {
   // const pathname = useLocation().pathname;
@@ -14,6 +14,8 @@ export const Navbar = () => {
         <NavItem label={aboutMe.label} link={aboutMe.link} />
         <NavItem label={project.label} link={project.link} />
         <NavItem label={contact.label} link={contact.link} />
+        <NavItem label={registration.label} link={registration.link} />
+        <NavItem label={login.label} link={login.link} />
       </ul>
     </nav>
   );

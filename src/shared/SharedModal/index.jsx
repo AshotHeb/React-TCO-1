@@ -14,6 +14,7 @@ import { DatePick } from "../../components/DatePick";
 import * as moment from "moment";
 import { connect } from "react-redux";
 import { addNewTaskAction } from "../../redux/actions/task-actions";
+import { getToken } from "../../helpers";
 
 const ConnectedAddTaskForm = ({ onSubmitCallback, setTasks, addNewTask }) => {
   const titleInputRef = useRef(null);
@@ -51,6 +52,7 @@ const ConnectedAddTaskForm = ({ onSubmitCallback, setTasks, addNewTask }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${getToken()}`
       },
       body: JSON.stringify(formData),
     })

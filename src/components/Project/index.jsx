@@ -16,8 +16,16 @@ const ConnectedProject = ({ setTasks }) => {
     const query = generateQuery(queryObject);
 
     getTasksRequest(query).then((data) => {
+
+      if (data.errors) {
+        throw data.errors
+      }
       setTasks(data)
-    });
+    })
+      .catch(err => {
+        console.log("🚀 ~ err", err)
+
+      })
   }, [queryObject]);
 
   /* cashed callbacks */
